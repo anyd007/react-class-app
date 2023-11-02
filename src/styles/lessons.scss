@@ -1,0 +1,15 @@
+.lessons{
+    width: 100%;
+
+    & h1{
+        text-align: center;
+        text-transform: uppercase;
+        color: #2a9d8f;
+        font-size: 3rem;
+        text-shadow: 2px 2px 6px ;
+
+        & span{
+            color: #e9c46a;
+        }
+    }
+}

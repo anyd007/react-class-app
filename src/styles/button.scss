@@ -1,0 +1,30 @@
+.button-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+
+    button {
+        box-shadow:
+            0.3em 0.3em 0 0 #2a9d8f,
+            inset 0.3em 0.3em 0 0 #2a9d8f;
+        background: none;
+        border: none;
+        transition: 0.25s;
+        font-size: 20px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        color: #2a9d8f;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover,
+        &:focus {
+            box-shadow:
+                0 0 0 0 #e9c46a,
+                inset 6em 3.5em 0 0 #e9c46a;
+                color: #fff;
+        }
+    }
+}
