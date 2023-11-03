@@ -8,6 +8,7 @@ import CurrentDayLesson from "./CurrentDayLesson";
 const Lessons = () => {
 
     const [lessons, setLessons] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const lessonsCollectionRef = collection(db, "lessons")
     const sortedQuery = query(lessonsCollectionRef, orderBy("sort"));
@@ -20,9 +21,11 @@ const Lessons = () => {
                 id: doc.id
             }))
             setLessons(filterData)
+            setLoading(false)
         }
         catch (err) {
             console.log(err.code);
+            setLoading(false)
         }
     }
     useEffect(() => {
@@ -33,7 +36,7 @@ const Lessons = () => {
     return (
         <div className="lessons">
             <h1>plan lekcji klasa <span>1 A</span></h1>
-            <CurrentDayLesson lessons={lessons} />
+            <CurrentDayLesson lessons={lessons} loading={loading}/>
         </div>
     );
 }
