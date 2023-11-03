@@ -1,0 +1,89 @@
+.current-day {
+    width: 100%;
+
+    .dayname-btn-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+        gap: 25px;
+        flex-wrap: wrap;
+        padding: 0 10px;
+
+    }
+
+    .current-timetable {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        color: #2a9d8f;
+        .day {
+            text-transform: uppercase;
+            font-size: 30px;
+        }
+
+        .dinner-time {
+            text-transform: uppercase;
+            font-size: 25px;
+            margin: 0;
+            border: 3px solid #e9c46a;
+            padding: 10px;
+            box-shadow:
+            0.3em 0.3em 0 0 #e9c46a,
+            inset 0.3em 0.3em 0 0 #e9c46a;
+        }
+    }
+
+    .current-day-plan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 0 0 20px 0;
+
+        &__map {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            margin: 0;
+            font-weight: 700;
+            font-size: 25px;
+            color: #2a9d8f;
+            text-shadow: 2px 2px 6px;
+            box-shadow: 0 0.2em 0 0 #e9c46a;
+            width: 60%;
+            .hour {}
+
+            .lesson {}
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .current-day-plan{
+
+            &__map{
+                width: 90%;
+            }
+        }
+    }
+    @media only screen and (max-width: 700px) {
+
+        .dayname-btn-container{
+            flex-direction: column;
+        }
+
+        .current-day-plan{
+
+            &__map{
+                grid-template-columns: 1fr;
+
+                .lesson{
+                    margin: 0 0 5px 0;
+                }
+            }
+        }
+
+    }
+}

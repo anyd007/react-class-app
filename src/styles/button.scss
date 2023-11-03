@@ -1,9 +1,6 @@
 .button-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem auto;
+    position: relative;
+    padding: 0 10px;
 
     button {
         box-shadow:
@@ -17,7 +14,8 @@
         text-transform: uppercase;
         color: #2a9d8f;
         cursor: pointer;
-        font-weight: bold;
+        font-weight: 700;
+        min-width: 180px;
 
         &:hover,
         &:focus {
@@ -27,4 +25,10 @@
                 color: #fff;
         }
     }
+    // @media only screen and (max-width: 700px) {
+       
+    //     button{
+    //         font-size: 15px;
+    //     }
+    // }
 }
