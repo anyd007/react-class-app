@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import '../styles/current-day-lessons.scss'
 import Loading from "../ui/Loading";
+import useDateDate from "../config/useDate";
+import useDate from "../config/useDate";
 
 
 const CurrentDayLesson = ({ lessons, loading }) => {
+
+    const { date } = useDate()
+    console.log(date);
+    lessons.map((lesson, i) =>{
+console.log(i +1);
+    })
 
     const [selecedDay, setSelectedDay] = useState('')
 
@@ -21,9 +29,12 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                 ))}
             </div>
             {loading && <Loading />}
-            {lessons.map((lesson) => (
+
+            {lessons.map((lesson, i) => (
+
+                
                 lesson.day === selecedDay &&
-                <div>
+                <div key={i}>
 
                     <div className="current-timetable" key={lesson.id}>
                         <p className="day">{lesson.day}</p>
