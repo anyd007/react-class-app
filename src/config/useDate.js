@@ -5,8 +5,7 @@ const useDate = () => {
     const [date, setDate] = useState('')
     const [fullTime, setFullTime] = useState('')
     const [dayIndex, setDayIndex] = useState(0)
-    const time = "15:40"
-    const dinnerTime = "12:31"
+    
     // const updateFullTime = () => {
     //     let currentDate = new Date()
     //     let hour = currentDate.getHours();
@@ -38,7 +37,7 @@ const useDate = () => {
   }, [])
    
 
-    return { date, fullTime, dayIndex, time, dinnerTime }
+    return { date, fullTime, dayIndex }
 }
 
 export default useDate;

@@ -8,7 +8,7 @@ import useDate from "../config/useDate";
 
 const CurrentDayLesson = ({ lessons, loading }) => {
 
-    const { date, fullTime, dayIndex, time, dinnerTime } = useDate()
+    const { date, fullTime, dayIndex } = useDate()
 
     const [selecedDay, setSelectedDay] = useState('')
     const [checkDate, setCheckDate] = useState(true)
