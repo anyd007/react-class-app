@@ -42,7 +42,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
         else{
             console.log("fupa");
         }
-    }, [])
+    }, [dayIndex])
 
     const buttonHandler = (day) => {
         setSelectedDay(day)

@@ -12,7 +12,7 @@ const useDate = () => {
     //     let minute = currentDate.getMinutes();
     //     let filerHour = hour < 10 ? '0' + hour : hour;
     //     let filerMinute = minute < 10 ? '0' + minute : minute;
-    //     setFullTime(`${filerHour}:${filerMinute
+    //     setFullTime(`${filerHour}:${filerMinut
 
     // }
   
