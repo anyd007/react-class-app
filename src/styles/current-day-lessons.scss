@@ -59,6 +59,15 @@
             .lesson {}
         }
     }
+
+    .lessons-txt-info{
+        text-align: center;
+        margin: 4rem auto;
+        color: #2a9d8f;
+        font-weight: 900;
+        font-size: 2rem;
+        white-space: pre-line;
+    }
     @media only screen and (max-width: 1024px) {
         .current-day-plan{
 

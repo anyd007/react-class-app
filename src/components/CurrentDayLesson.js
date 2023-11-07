@@ -8,14 +8,44 @@ import useDate from "../config/useDate";
 
 const CurrentDayLesson = ({ lessons, loading }) => {
 
-    const { date } = useDate()
+    const { date, fullTime, dayIndex, time, dinnerTime } = useDate()
 
     const [selecedDay, setSelectedDay] = useState('')
     const [checkDate, setCheckDate] = useState(true)
+    const [checkEndTime, setCheckEndTime] = useState(false)
+    const [infoTxt, setInfoTxt] = useState('')
 
-    const buttonHandler = (day) =>{
+   
+
+    useEffect(() => {
+        if (dayIndex !== null && lessons[dayIndex]) {
+            
+            let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
+            let finishDinnerTime = dinnerTimeParts[1]
+            console.log(finishDinnerTime);
+
+            if (finishDinnerTime > lessons[dayIndex].end) {
+                setCheckDate(false)
+                setCheckEndTime(true)
+                
+                setInfoTxt(`Lekcje się już skończyły 😂\n został tylko obiad 🍽️ w godzinach: ${lessons[dayIndex].dinner}\nsprawdź pozostałe dni wybieając z górnego menu ⬆️`)
+
+            }
+
+           else if (fullTime > lessons[dayIndex].end) {
+                setCheckDate(false)
+                setCheckEndTime(true)
+                setInfoTxt("Lekcje się już skończyły 😂\n sprawdź pozostałe dni wybieając z górnego menu ⬆️")
+
+            }
+        }
+    }, [])
+
+    const buttonHandler = (day) => {
         setSelectedDay(day)
         setCheckDate(false)
+        setCheckEndTime(false)
+
     }
 
 
@@ -24,15 +54,15 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
             <div className="dayname-btn-container">
                 {lessons && lessons.map((lesson) => (
-                    <Button  onClick={() => buttonHandler(lesson.day)} value={lesson.day} key={lesson.id} />
+                    <Button onClick={() => buttonHandler(lesson.day)} value={lesson.day} key={lesson.id} />
                 ))}
             </div>
             {loading && <Loading />}
-
+            {checkEndTime && <h2 className="lessons-txt-info">{infoTxt}</h2>}
             {lessons.map((lesson, i) => (
 
-               checkDate && lesson.day.trim() === date &&
-              
+                checkDate && lesson.day.trim() === date &&
+
                 <div key={i}>
 
                     <div className="current-timetable" key={lesson.id}>
@@ -51,7 +81,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
                 </div>
             ))}
-
+            
             {lessons.map((lesson, i) => (
 
                 lesson.day === selecedDay &&
@@ -73,6 +103,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
                 </div>
             ))}
+            
         </div>
     );
 }
