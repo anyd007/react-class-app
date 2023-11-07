@@ -15,10 +15,10 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     const [checkEndTime, setCheckEndTime] = useState(false)
     const [infoTxt, setInfoTxt] = useState('')
 
-   
+   console.log(dayIndex);
 
     useEffect(() => {
-        if (dayIndex !== null && lessons[dayIndex]) {
+        if (lessons[dayIndex]) {
             
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
@@ -38,6 +38,9 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                 setInfoTxt("Lekcje się już skończyły 😂\n sprawdź pozostałe dni wybieając z górnego menu ⬆️")
 
             }
+        }
+        else{
+            console.log("fupa");
         }
     }, [])
 
