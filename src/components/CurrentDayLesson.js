@@ -15,7 +15,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     const [checkEndTime, setCheckEndTime] = useState(false)
     const [infoTxt, setInfoTxt] = useState('')
 
-   console.log(dayIndex);
+
 
     useEffect(() => {
         if (lessons[dayIndex]) {
