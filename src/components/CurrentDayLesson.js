@@ -9,7 +9,6 @@ import useDate from "../config/useDate";
 const CurrentDayLesson = ({ lessons, loading }) => {
 
     const { date } = useDate()
-    console.log(date);
 
     const [selecedDay, setSelectedDay] = useState('')
     const [checkDate, setCheckDate] = useState(true)
@@ -18,16 +17,14 @@ const CurrentDayLesson = ({ lessons, loading }) => {
         setSelectedDay(day)
         setCheckDate(false)
     }
-    // useEffect(() => {
-    //     buttonHandler()
-    // }, [])
+
 
     return (
         <div className="current-day">
 
             <div className="dayname-btn-container">
                 {lessons && lessons.map((lesson) => (
-                    <Button onClick={() => buttonHandler(lesson.day)} value={lesson.day} key={lesson.id} />
+                    <Button  onClick={() => buttonHandler(lesson.day)} value={lesson.day} key={lesson.id} />
                 ))}
             </div>
             {loading && <Loading />}

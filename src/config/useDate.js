@@ -8,7 +8,7 @@ const useDate = () => {
     const day = currentDate.getDay()
     useEffect(() =>{
         setDate(daysOfWeek[day])
-    })
+    }, [])
     
 
     return {date}
