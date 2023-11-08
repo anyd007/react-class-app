@@ -4,7 +4,7 @@ const useDate = () => {
     const daysOfWeek = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
     const [date, setDate] = useState('')
     const [fullTime, setFullTime] = useState('')
-    const [dayIndex, setDayIndex] = useState(null)
+    const [dayIndex, setDayIndex] = useState('')
  
     // const updateFullTime = () => {
     //     let currentDate = new Date()

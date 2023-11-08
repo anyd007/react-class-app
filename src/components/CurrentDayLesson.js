@@ -20,11 +20,12 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     useEffect(() => {
         if (lessons[dayIndex]) {
             
+            
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
             console.log(finishDinnerTime);
-
-            if (finishDinnerTime > lessons[dayIndex].end) {
+            console.log(lessons[dayIndex].end)
+            if (finishDinnerTime >= lessons[dayIndex].end && finishDinnerTime > lessons[dayIndex].start) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 
