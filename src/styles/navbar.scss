@@ -1,0 +1,51 @@
+.navbar {
+    
+    margin: 2rem 0 0 0;
+    padding: 0 10px;
+
+    .links {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 15px;
+        text-align: center;
+
+        &__item {
+            text-decoration: none;
+            box-shadow:
+                0.3em 0.3em 0 0 #2a9d8f,
+                inset 0.3em 0.3em 0 0 #2a9d8f;
+            background: none;
+            border: none;
+            transition: 0.25s;
+            font-size: 15px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            color: #2a9d8f;
+            cursor: pointer;
+            font-weight: 700;
+            min-width: 100px;
+
+            &:hover,
+            &:focus {
+                box-shadow:
+                    0 0 0 0 #e9c46a,
+                    inset 6em 3.5em 0 0 #e9c46a;
+                    color: #fff;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+       
+    .links {
+        &__item {
+            font-size: 12px;
+            min-width: 60px;;
+        }
+    }
+    }
+}
+  

@@ -23,18 +23,21 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             setPanding(false)
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
-            if (finishDinnerTime >= lessons[dayIndex].end && finishDinnerTime > lessons[dayIndex].start) {
+            let startDinnerTime = dinnerTimeParts[0]
+            console.log(lessons[dayIndex].start);
+            console.log(startDinnerTime);
+            if (startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].start) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 
-                setInfoTxt(`Lekcje się już skończyły 😂\n został tylko obiad 🍽️ w godzinach: ${lessons[dayIndex].dinner}\nsprawdź pozostałe dni wybieając z górnego menu ⬆️`)
+                setInfoTxt(`Lekcje się już skończyły 😊\n został tylko obiad 🍽️ w godzinach: ${lessons[dayIndex].dinner}\nsprawdź pełny plan, wybierając z górnego menu ⬆️`)
 
             }
 
            else if (fullTime > lessons[dayIndex].end) {
                 setCheckDate(false)
                 setCheckEndTime(true)
-                setInfoTxt("Lekcje się już skończyły 😂\n sprawdź pozostałe dni wybieając z górnego menu ⬆️")
+                setInfoTxt("Lekcje się już skończyły 😊\n sprawdź pełny plan, wybierając z górnego menu ⬆️")
 
             }
         }
