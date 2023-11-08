@@ -14,17 +14,15 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     const [checkDate, setCheckDate] = useState(true)
     const [checkEndTime, setCheckEndTime] = useState(false)
     const [infoTxt, setInfoTxt] = useState('')
+    const [panding, setPanding] = useState(false)
 
 
 
     useEffect(() => {
         if (lessons[dayIndex]) {
-            
-            
+            setPanding(false)
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
-            console.log(finishDinnerTime);
-            console.log(lessons[dayIndex].end)
             if (finishDinnerTime >= lessons[dayIndex].end && finishDinnerTime > lessons[dayIndex].start) {
                 setCheckDate(false)
                 setCheckEndTime(true)
@@ -41,7 +39,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             }
         }
         else{
-            console.log("fupa");
+           setPanding(true)
         }
     }, [dayIndex])
 
@@ -61,6 +59,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                     <Button onClick={() => buttonHandler(lesson.day)} value={lesson.day} key={lesson.id} />
                 ))}
             </div>
+            {panding && <Loading />}
             {loading && <Loading />}
             {checkEndTime && <h2 className="lessons-txt-info">{infoTxt}</h2>}
             {lessons.map((lesson, i) => (

@@ -32,7 +32,6 @@ const Lessons = () => {
         getLessonsList()
     }, [])
 
-
     return (
         <div className="lessons">
             <h1>plan lekcji klasa <span>1 A</span></h1>

@@ -5,21 +5,7 @@ const useDate = () => {
     const [date, setDate] = useState('')
     const [fullTime, setFullTime] = useState('')
     const [dayIndex, setDayIndex] = useState('')
- 
-    // const updateFullTime = () => {
-    //     let currentDate = new Date()
-    //     let hour = currentDate.getHours();
-    //     let minute = currentDate.getMinutes();
-    //     let filerHour = hour < 10 ? '0' + hour : hour;
-    //     let filerMinute = minute < 10 ? '0' + minute : minute;
-    //     setFullTime(`${filerHour}:${filerMinut
 
-    // }
-  
-       
-        
-
-      
  
   useEffect(() =>{
     setInterval(() => {
