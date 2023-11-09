@@ -1,5 +1,15 @@
 
 .signin{
+
+    h2{
+        text-align: center;
+        text-transform: uppercase;
+        margin: 2rem auto;
+        font-size: 2rem;
+        font-weight: 900;
+        color: #2a9d8f;
+        text-shadow: 2px 2px 6px;
+    }
     &__container{
         display: flex;
         flex-direction: column;
@@ -8,9 +18,10 @@
         gap: 10px;
 
         label{
-            color: #2a9d8f;
+            color: #e9c46a;
             font-weight: 700;
             font-size: 1.5rem;
+            text-shadow: 2px 2px 6px;
         }
 
         input{
@@ -20,13 +31,39 @@
             text-align: center;
             background: transparent;
             transition: all 0.3s linear;
-            
+            border: none;
+            border-bottom: 2px solid #e9c46a;
+            outline: none;
+            color: #2a9d8f;
             &::placeholder{
                 color: #2a9d8f;
                 transition: all 0.1s linear;
+                opacity: 1;
             }
             &:focus::placeholder{
-                font-size: 0;
+                opacity: 0;
+            }
+            &:focus{
+                border-bottom: 3px solid #2a9d8f;
+            }
+        }
+        
+    }
+
+    .errorTxt{
+        text-align: center;
+        text-transform: uppercase;
+        color: red;
+        padding: 20px 0;
+        font-size: 1.5rem;
+    }
+
+       @media only screen and (max-width: 700px) {
+       
+        &__container{
+            gap: 20px;
+            input{
+                width: 80%;
             }
         }
         
