@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {db, auth} from "../config/firebase"
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, where, query } from "firebase/firestore";
 
 const UserNavbar = ({user}) => {
     
@@ -30,22 +30,23 @@ const UserNavbar = ({user}) => {
         }
     }
 
-    const getKidName = async () =>{
+ const getKidName = async () =>{
         
-        try{
+  try{
             
-           const data = await getDocs(kidNameRef);
+    const data = await getDocs(query(kidNameRef, where("userId", "==", auth?.currentUser?.uid)));
             
-            const filterData = data.docs.map((doc) =>({
-                ...doc.data,
-                id: doc.id
-            }))
-            setFbKidName(filterData)
-        }
-        catch(err){
-            console.log(err.message);
-        }
-    }
+    const filterData = data.docs.map((doc) =>({
+      ...doc.data(),
+      id: doc.id
+    }))
+    setFbKidName(filterData)
+  }
+  catch(err){
+    console.log(err.message);
+  }
+}
+
     useEffect(() =>{
         getKidName()
         console.log("działa");
