@@ -23,11 +23,7 @@ const Navbar = () => {
             setLogin(true)
             setSignin(false)
         }
-        else{
-        setHome(true)
-        setLogin(true)
-        setSignin(true)
-        }
+       
     }
 
 

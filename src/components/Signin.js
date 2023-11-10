@@ -4,6 +4,7 @@ import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import Popup from "../ui/Popup";
+import Loading from "../ui/Loading";
 
 const Signin = () => {
 
@@ -13,18 +14,21 @@ const Signin = () => {
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
     const [openPopup, setOpenPopup] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrorTxt('')
-        
+        setLoading(true)
         if (password !== repassword) {
             setErrorTxt("Hasła nie są identyczne")
+            setLoading(false)
         }
         else if(!email.includes("@")){
             setErrorTxt("Błędny mail")
+            setLoading(false)
         }
         else {
             try {
@@ -32,6 +36,7 @@ const Signin = () => {
                 setTxtStatus("Rejestacja zakończona sukscesem...")
                 setOpenPopup(true)
                 setErrorTxt('')
+                setLoading(false)
             }
             catch (err) {
                 console.log(err.message);
@@ -45,6 +50,7 @@ const Signin = () => {
                 setTxtStatus("Błąd rejestacji: " + err.code)
                 }
                 setOpenPopup(true)
+                setLoading(false)
             }
         }
     }
@@ -52,6 +58,7 @@ const Signin = () => {
 
         <div className="signin">
            { openPopup && <Popup status={txtStatus} setOpenPopup={setOpenPopup}/> }
+           { loading && <Loading  /> }
             <h2>rejestracja</h2>
 
             <form className="signin__container" onSubmit={handleSubmit}>
