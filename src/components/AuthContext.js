@@ -30,7 +30,7 @@ export const AuthPrivider = ({children}) =>{
     console.log(authenticated);
     return (
         <AuthContext.Provider value={{currentUser, setCurrentUser, authenticated}}>
-            {authChecked ? children : null}
+            {authChecked ? children : children}
         </AuthContext.Provider>
     )
 
