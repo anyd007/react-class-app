@@ -1,10 +1,9 @@
-import Button from "../ui/Button";
-import { signOut } from "firebase/auth";
-// import { Auth } from "../config/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import {db, auth} from "../config/firebase"
 import { getDocs, collection, addDoc, where, query } from "firebase/firestore";
+import '../styles/usernavbar.scss';
+import Grades from "./Grades";
 
 const UserNavbar = () => {
     
@@ -12,7 +11,7 @@ const UserNavbar = () => {
     const[kidName, setKidName] = useState('')
     const [fbKidName, setFbKidName] = useState([])
     
-    const navigate = useNavigate()
+   
    
     const kidNameRef = collection(db, "users")
   
@@ -53,20 +52,8 @@ const UserNavbar = () => {
     },[])
   
    
-
-    const handleLogout = async () => {
-        try{
-            await signOut(auth)
-            navigate('/')
-        }
-        catch(err){
-            console.log(err.code);
-        }
-    }
-    console.log(fbKidName);
     return (
         <div className="user-navbar">
-             <Button onClick={handleLogout} value="WYLOGUJ SIĘ"/>
             <h2>{`Witaj ${auth?.currentUser?.displayName}`}</h2>
             <input 
             type="text" 
@@ -76,7 +63,7 @@ const UserNavbar = () => {
             />
            <button onClick={handleAddName}>zapis imię</button>
          {fbKidName.map((name) =>(<h2>{name.kidName}</h2>))}
-     
+        <Grades />
         </div>
     );
 }

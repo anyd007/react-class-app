@@ -3,7 +3,6 @@ import '../styles/signin.scss';
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
-import Popup from "../ui/Popup";
 import Loading from "../ui/Loading";
 
 const Signin = () => {
@@ -14,7 +13,6 @@ const Signin = () => {
     const [name, setName] = useState('')
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
-    const [openPopup, setOpenPopup] = useState(false);
     const [loading, setLoading] = useState(false);
 
 
@@ -35,8 +33,10 @@ const Signin = () => {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password)
                 setTxtStatus("Rejestacja zakończona sukscesem...")
-                setOpenPopup(true)
                 setErrorTxt('')
+                setEmail('')
+                setPassword('')
+                setRepassword('')
                 setLoading(false)
                 
                 await updateProfile(userCredential.user, {
@@ -54,7 +54,6 @@ const Signin = () => {
                 else{
                 setTxtStatus("Błąd rejestacji: " + err.code)
                 }
-                setOpenPopup(true)
                 setLoading(false)
             }
         }
@@ -62,10 +61,9 @@ const Signin = () => {
     return (
 
         <div className="signin">
-           { openPopup && <Popup status={txtStatus} setOpenPopup={setOpenPopup}/> }
-           { loading && <Loading  /> }
+            { loading && <Loading  /> }
             <h2>rejestracja</h2>
-
+            <p className="error">{txtStatus}</p>
             <form className="signin__container" onSubmit={handleSubmit}>
                 <label>Podaj e-mail</label>
                 <input type="text"

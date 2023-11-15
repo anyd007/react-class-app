@@ -19,7 +19,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     useEffect(() =>{
         
         if (lessons[dayIndex]) {
-            
+           
             for(let i=0; i<lessons[dayIndex].hours.length; i++){
                 let lessonsHours;
                lessonsHours = lessons[dayIndex].hours[i].split(' - ')
@@ -31,13 +31,9 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                 SetCurrentLesson(null)
               }
             }
-            // let lessonHours = lessons[dayIndex].hours[0].split('-')
-            // console.log(lessonHours);
-            
            }
          
     }, [date])
-    console.log(currentLesson);
 
     useEffect(() => {
         if (lessons[dayIndex]) {
@@ -45,8 +41,8 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
             let startDinnerTime = dinnerTimeParts[0]
-          
-            if (startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
+
+            if (fullTime >= lessons[dayIndex].end && startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 
@@ -54,7 +50,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
             }
 
-           else if (fullTime > lessons[dayIndex].end) {
+           else {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 setInfoTxt("Lekcje się już skończyły 😊\n sprawdź pełny plan, wybierając z górnego menu ⬆️")

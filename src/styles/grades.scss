@@ -1,8 +1,7 @@
-.button-container {
-    position: relative;
-    padding: 0 10px;
-    
+.grades {
+    text-align: center;
     button {
+        
         box-shadow:
             0.3em 0.3em 0 0 #2a9d8f,
             inset 0.3em 0.3em 0 0 #2a9d8f;
@@ -16,19 +15,21 @@
         cursor: pointer;
         font-weight: 700;
         min-width: 180px;
+        outline: none;
 
-        &:hover,
-        &:focus {
+        &:hover {
             box-shadow:
                 0 0 0 0 #e9c46a,
                 inset 6em 3.5em 0 0 #e9c46a;
-                color: #fff;
+            color: #000;
         }
     }
-    // @media only screen and (max-width: 700px) {
-       
-    //     button{
-    //         font-size: 15px;
-    //     }
-    // }
+    .grades-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        
+    }
 }
