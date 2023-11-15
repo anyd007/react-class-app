@@ -6,9 +6,10 @@ import {auth} from '../config/firebase'
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import '../styles/login.scss';
 import Loading from "../ui/Loading";
+import { useNavContext } from "./NavContext";
 
 const Login = () => {
-
+    const {showPrivMenu, SetShowPrivMenu} = useNavContext()
     const [emailLogin, setEmailLogin] = useState('')
     const [passwordLogin, setPasswordLogin] = useState('')
     const [checkLogin, setCheckLogin] = useState(false)
@@ -29,6 +30,7 @@ const Login = () => {
             setCheckLogin(true)
             setLoading(false)
             setTxtStatus("Logowanie udane !")
+            SetShowPrivMenu(true)
         }
         catch(err){
             console.log(err.code);

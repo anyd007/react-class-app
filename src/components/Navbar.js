@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import '../styles/navbar.scss';
 import { useEffect, useState } from "react";
+import { useNavContext } from "./NavContext";
 
 const Navbar = () => {
     const [home, setHome] = useState(false)
     const [signin, setSignin] = useState(true)
     const [login, setLogin] = useState(true)
+    const {showPrivMenu, SetShowPrivMenu} = useNavContext()
 
     const handleClick = () => {
         if (home) {

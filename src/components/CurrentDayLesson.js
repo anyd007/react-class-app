@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import '../styles/current-day-lessons.scss'
 import Loading from "../ui/Loading";
-import useDateDate from "../config/useDate";
 import useDate from "../config/useDate";
 
 
@@ -14,9 +13,31 @@ const CurrentDayLesson = ({ lessons, loading }) => {
     const [checkDate, setCheckDate] = useState(true)
     const [checkEndTime, setCheckEndTime] = useState(false)
     const [infoTxt, setInfoTxt] = useState('')
+    const [currentLesson, SetCurrentLesson] = useState(null)
    
 
-
+    useEffect(() =>{
+        
+        if (lessons[dayIndex]) {
+            
+            for(let i=0; i<lessons[dayIndex].hours.length; i++){
+                let lessonsHours;
+               lessonsHours = lessons[dayIndex].hours[i].split(' - ')
+          
+              if(fullTime >= lessonsHours[0] && fullTime <= lessonsHours[1]){
+                SetCurrentLesson(i)
+              }
+              else{
+                SetCurrentLesson(null)
+              }
+            }
+            // let lessonHours = lessons[dayIndex].hours[0].split('-')
+            // console.log(lessonHours);
+            
+           }
+         
+    }, [date])
+    console.log(currentLesson);
 
     useEffect(() => {
         if (lessons[dayIndex]) {
@@ -24,8 +45,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
             let finishDinnerTime = dinnerTimeParts[1]
             let startDinnerTime = dinnerTimeParts[0]
-            console.log(lessons[dayIndex].start);
-            console.log(startDinnerTime);
+          
             if (startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
                 setCheckDate(false)
                 setCheckEndTime(true)
@@ -79,7 +99,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                     <div className="current-day-plan">
                         {lesson.hours.map((hour, i) => (
                             <div className="current-day-plan__map" key={i}>
-                                <p className="hour">{hour}</p>
+                                <p className="hour">{currentLesson == i && currentLesson != null ? `TERAZ:  ${hour}` : hour}</p>
                                 <p className="lesson">{lesson.lessons[i]}</p>
                             </div>
                         ))}

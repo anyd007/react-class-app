@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 import {db, auth} from "../config/firebase"
 import { getDocs, collection, addDoc, where, query } from "firebase/firestore";
 
-const UserNavbar = ({user}) => {
+const UserNavbar = () => {
     
 
     const[kidName, setKidName] = useState('')
     const [fbKidName, setFbKidName] = useState([])
-
+    
     const navigate = useNavigate()
    
-    const kidNameRef = collection(db, "test")
+    const kidNameRef = collection(db, "users")
   
     const handleAddName = async () =>{
         
@@ -67,7 +67,7 @@ const UserNavbar = ({user}) => {
     return (
         <div className="user-navbar">
              <Button onClick={handleLogout} value="WYLOGUJ SIĘ"/>
-            <h2>to będzie nawigacja</h2>
+            <h2>{`Witaj ${auth?.currentUser?.displayName}`}</h2>
             <input 
             type="text" 
             placeholder="podaj imie dziecka...."

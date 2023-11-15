@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import '../styles/signin.scss';
 import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import Popup from "../ui/Popup";
 import Loading from "../ui/Loading";
@@ -11,6 +11,7 @@ const Signin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repassword, setRepassword] = useState('')
+    const [name, setName] = useState('')
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
     const [openPopup, setOpenPopup] = useState(false);
@@ -32,11 +33,15 @@ const Signin = () => {
         }
         else {
             try {
-                await createUserWithEmailAndPassword(auth, email, password)
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
                 setTxtStatus("Rejestacja zakończona sukscesem...")
                 setOpenPopup(true)
                 setErrorTxt('')
                 setLoading(false)
+                
+                await updateProfile(userCredential.user, {
+                    displayName: name
+                })
             }
             catch (err) {
                 console.log(err.message);
@@ -67,6 +72,13 @@ const Signin = () => {
                     placeholder="e-mail..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                 <label>Podaj swoje imię</label>
+                <input type="text"
+                    placeholder="imię..."
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                 />
                 <label>Podaj hasło</label>
