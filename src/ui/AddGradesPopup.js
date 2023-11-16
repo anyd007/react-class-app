@@ -8,7 +8,7 @@ const AddGradesPopup = () => {
     const { setOpenPopup } = useNavContext()
     const [selectedDate, setSelectedDate] = useState('')
     const [subject, setSubject] = useState('')
-    const [grade, setGrade] = useState('')
+    const [grade, setGrade] = useState(0)
    
     const handleAddGrades = async (e) => {
         e.preventDefault();
@@ -19,6 +19,9 @@ const AddGradesPopup = () => {
             // Przekształć datę z pola input type selectedDate na obiekt JavaScript Date
             const selectedDateObject = new Date(selectedDate);
 
+             // Przekształć grade na liczbę
+        const gradeNumber = parseFloat(grade);
+
             // Utwórz Timestamp z obiektu Date
             const timestamp = Timestamp.fromDate(selectedDateObject);
 
@@ -27,7 +30,7 @@ const AddGradesPopup = () => {
                 selectedDate,
                 dateDate: timestamp,
                 subject,
-                grade,
+                grade: gradeNumber,
                 userId
             });
 

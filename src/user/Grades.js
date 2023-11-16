@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import '../styles/grades.scss'
 import { db, auth } from "../config/firebase"
-import { getDocs, collection, where, query } from "firebase/firestore";
+import { getDocs, collection, where, query, deleteDoc, doc } from "firebase/firestore";
 import AddGradesPopup from '../ui/AddGradesPopup';
 import { useNavContext } from '../components/NavContext';
 import { useAuthContext } from "../components/AuthContext";
+import { AiFillDelete } from "react-icons/ai";
 
 const Grades = () => {
     const userCollectioRef = collection(db, "users")
@@ -49,6 +50,19 @@ const Grades = () => {
     const handleOpenPopup = () => {
         setOpenPopup(true)
     }
+
+    const handleDelete = async (id) => {
+        try{
+            const gradieDoc = doc(db, "users", id)
+            await deleteDoc(gradieDoc)
+            getUserData();
+            console.log("element został usunięty ");
+        }
+        catch(err){
+            console.log("nie udało się usunąć pozycji: " + err.message);
+        }
+    }
+
     const subtitleSort = () =>{
        let sort =  [...grades].sort((a,b) => a.subject.localeCompare(b.subject))
         setGrades(sort)
@@ -71,6 +85,7 @@ const Grades = () => {
                         <p>{grade.selectedDate}</p>
                         <p>{grade.subject}</p>
                         <p>{grade.grade}</p>
+                        <AiFillDelete onClick={() => handleDelete(grade.id)} className='delete' />
                     </div>))}
                 </div>
             </div>

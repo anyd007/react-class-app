@@ -66,6 +66,16 @@
                 P{
                     color: #2a9d8f;
                 }
+                .delete{
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                    transition: all 0.2s linear;
+
+                    &:hover{
+                        color: red;
+                        transform: scale(1.2);
+                    }
+                }
             }
         }
         
