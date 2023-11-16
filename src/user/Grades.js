@@ -35,15 +35,21 @@ const Grades = () => {
         }
     }
     useEffect(() => {
-        getUserData()
+        getUserData();
         console.log("działa");
-    }, [openPopup])
+    }, [currentUser]);
+
+    useEffect(() => {
+        
+            getUserData();
+
+    }, [openPopup]);
 
 
     const handleOpenPopup = () => {
         setOpenPopup(true)
     }
-    console.log(grades);
+    console.log(currentUser);
     return (
         <div className="grades">
             <h2>oceny</h2>
