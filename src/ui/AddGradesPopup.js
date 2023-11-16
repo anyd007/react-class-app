@@ -1,49 +1,92 @@
 import '../styles/add-grades-popup.scss';
 import { useNavContext } from '../components/NavContext';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { auth, db } from '../config/firebase';
+import { useState } from 'react';
 
 const AddGradesPopup = () => {
-    const {openPopup, setOpenPopup} = useNavContext()
+    const { setOpenPopup } = useNavContext()
+    const [selectedDate, setSelectedDate] = useState('')
+    const [subject, setSubject] = useState('')
+    const [grade, setGrade] = useState('')
+   
+    const handleAddGrades = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const userId = auth?.currentUser?.uid;
+            const eventsRef = collection(db, 'users');
+            // Przekształć datę z pola input type selectedDate na obiekt JavaScript Date
+            const selectedDateObject = new Date(selectedDate);
 
-    const handleClousePopup = ( ) => {
+            // Utwórz Timestamp z obiektu Date
+            const timestamp = Timestamp.fromDate(selectedDateObject);
+
+            // Dodaj nowe wydarzenie do podkolekcji
+            await addDoc(eventsRef, {
+                selectedDate,
+                dateDate: timestamp,
+                subject,
+                grade,
+                userId
+            });
+
+            console.log('Wydarzenie zostało dodane.');
+            setOpenPopup(false)
+        }
+        catch (err) {
+            console.error('Błąd podczas dodawania wydarzenia:', err.message);
+        }
+    }
+
+
+    const handleClousePopup = () => {
         setOpenPopup(false)
     }
+
     return (
 
         <div className="add-grades-popup">
-                <button onClick={handleClousePopup} className='clouse-btn'>zamknij</button>
-              <form className="grades-container">
+            <button onClick={handleClousePopup} className='clouse-btn'>zamknij</button>
+            <form className="grades-container" onSubmit={handleAddGrades}>
                 <label>podaj datę</label>
-                <input 
-                type="date" 
-                required
+                <input
+                    type="date"
+                    required
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
                 />
                 <label>przedmiot</label>
-                <select 
-                id="subjects"
-                required
+                <select
+                    id="subjects"
+                    required
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                 >
                     <option value=""></option>
-                    <option value="">Język polski</option>
-                    <option value="">Edukacja Plastyczna</option>
-                    <option value="">Informatyka</option>
-                    <option value="">WF</option>
-                    <option value="">Matematyka</option>
-                    <option value="">Muzyka</option>
-                    <option value="">Religia</option>
-                    <option value="">Język angielski</option>
+                    <option value="Język polski">Język polski</option>
+                    <option value="Edukacja Plastyczna">Edukacja Plastyczna</option>
+                    <option value="Informatyka">Informatyka</option>
+                    <option value="WF">WF</option>
+                    <option value="Matematyka">Matematyka</option>
+                    <option value="Muzyka">Muzyka</option>
+                    <option value="Religia">Religia</option>
+                    <option value="Język angielski">Język angielski</option>
                 </select>
                 <label>ocena</label>
-                <select 
-                id="grades"
-                required
+                <select
+                    id="grades"
+                    value={grade}
+                    onChange={(e) => setGrade(e.target.value)}
+                    required
                 >
                     <option value=""></option>
-                    <option value="">6</option>
-                    <option value="">5</option>
-                    <option value="">4</option>
-                    <option value="">3</option>
-                    <option value="">2</option>
-                    <option value="">1</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
                 </select>
                 <button>dodaj ocenę</button>
             </form>
@@ -51,5 +94,5 @@ const AddGradesPopup = () => {
         </div>
     );
 }
- 
+
 export default AddGradesPopup;

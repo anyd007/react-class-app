@@ -27,7 +27,7 @@ export const AuthPrivider = ({children}) =>{
         return () => unsubscribe()
        
     },[auth])
-    console.log(authenticated);
+  
     return (
         <AuthContext.Provider value={{currentUser, setCurrentUser, authenticated}}>
             {authChecked ? children : children}

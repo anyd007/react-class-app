@@ -30,6 +30,43 @@
         gap: 10px;
         justify-content: center;
         align-items: center;
+
+        .show-grades{
+            width: 90%;
+            .show-grades-titles,
+            .show-grades-items{
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                align-items: center;
+                justify-content: space-evenly;
+                // width: 30%;
+
+                p{
+                    text-align: center;
+                    width: 33%;
+                    height: 100%;
+                    text-transform: uppercase;
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    text-shadow: 2px 2px 5px ;
+                }
+            }
+            .show-grades-titles{
+                border: 2px solid ;
+                p{
+                    color: #e9c46a;
+                    
+
+                }
+            }
+            .show-grades-items{
+                border-bottom: 2px solid;
+                P{
+                    color: #2a9d8f;
+                }
+            }
+        }
         
     }
 }

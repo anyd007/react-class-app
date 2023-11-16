@@ -98,7 +98,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                     <div className="current-day-plan">
                         {lesson.hours.map((hour, i) => (
                             <div className="current-day-plan__map" key={i}>
-                                <p className="hour">{currentLesson == i ? `TERAZ:  ${hour}` : hour}</p>
+                                <p className="hour">{currentLesson == i && currentLesson !== null ? `TERAZ:  ${hour}` : hour}</p>
                                 <p className="lesson">{lesson.lessons[i]}</p>
                             </div>
                         ))}
