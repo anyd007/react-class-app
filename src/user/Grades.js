@@ -49,18 +49,22 @@ const Grades = () => {
     const handleOpenPopup = () => {
         setOpenPopup(true)
     }
-    console.log(currentUser);
+    const subtitleSort = () =>{
+       let sort =  [...grades].sort((a,b) => a.subject.localeCompare(b.subject))
+        setGrades(sort)
+    }
+
     return (
         <div className="grades">
-            <h2>oceny</h2>
+            <h2>oceny twojego dziecka</h2>
             <button onClick={handleOpenPopup}>dodaj ocenę</button>
             <div className='grades-container'>
                 {openPopup && <AddGradesPopup />}
                 <div className="show-grades" >
-                    {grades.length == 0 ? null : <h2>oceny twojejgo dziecka</h2>}
+                   
                     {grades.length == 0 ? null : <div className="show-grades-titles">
-                        <p>data</p>
-                        <p>przedmiot</p>
+                        <p >data</p>
+                        <p onClick={subtitleSort}>przedmiot</p>
                         <p>ocena</p>
                     </div> }
                     {grades.map((grade) => (<div className="show-grades-items" key={grade.id}>
