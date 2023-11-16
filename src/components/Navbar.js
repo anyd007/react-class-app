@@ -29,7 +29,7 @@ const Navbar = () => {
         else{
             SetShowPrivMenu(false)
         }
-    })
+    },[currentUser])
 
 
 
@@ -39,7 +39,7 @@ const Navbar = () => {
                 <Link className="links__item" to="/">Strona główna</Link>
                 {!showPrivMenu && <Link  className="links__item" to="/signin">Rejestracja</Link>}
                 {!showPrivMenu && <Link  className="links__item" to="login">Logowanie</Link>}
-                {showPrivMenu && <Link className="links__item" to="/users/*">twoje dane</Link>}
+                {showPrivMenu && <Link className="links__item" to="/users/">twoje dane</Link>}
                 {showPrivMenu && <Button onClick={handleLogout} value="WYLOGUJ SIĘ"/>}
             </div>
         </nav>

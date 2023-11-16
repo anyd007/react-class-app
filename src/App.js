@@ -20,7 +20,7 @@ function App() {
               <Route path="/" element={<Lessons />} />
               <Route path="/signin" element={<Signin />} />
               <Route path="/login/*" element={<Login />} />
-              <Route path="/users/:userId/*" element={<UserNavbar />}/>
+              <Route path="/users/*" element={<UserNavbar />}/>
             </Routes>
           </Router>
         </AuthPrivider>

@@ -25,16 +25,19 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                lessonsHours = lessons[dayIndex].hours[i].split(' - ')
           
               if(fullTime >= lessonsHours[0] && fullTime <= lessonsHours[1]){
-                SetCurrentLesson(i)
+                console.log("działa");
+                return SetCurrentLesson(i)
+                
               }
               else{
                 SetCurrentLesson(null)
+                console.log("nie dziła");
               }
             }
            }
          
-    }, [date])
-
+    }, [fullTime])
+    console.log(currentLesson);
     useEffect(() => {
         if (lessons[dayIndex]) {
          
@@ -95,7 +98,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                     <div className="current-day-plan">
                         {lesson.hours.map((hour, i) => (
                             <div className="current-day-plan__map" key={i}>
-                                <p className="hour">{currentLesson == i && currentLesson != null ? `TERAZ:  ${hour}` : hour}</p>
+                                <p className="hour">{currentLesson == i ? `TERAZ:  ${hour}` : hour}</p>
                                 <p className="lesson">{lesson.lessons[i]}</p>
                             </div>
                         ))}
