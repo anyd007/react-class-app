@@ -23,21 +23,21 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             for(let i=0; i<lessons[dayIndex].hours.length; i++){
                 let lessonsHours;
                lessonsHours = lessons[dayIndex].hours[i].split(' - ')
-          
               if(fullTime >= lessonsHours[0] && fullTime <= lessonsHours[1]){
-                console.log("działa");
+                console.log("pokazywanie obecnej lekcji działa, dla godzin:" + lessonsHours);
                 return SetCurrentLesson(i)
                 
               }
               else{
+               
                 SetCurrentLesson(null)
-                console.log("nie dziła");
+                console.log("pokazywanie obecnej lekcji nie dziła");
               }
             }
            }
          
-    }, [fullTime])
-    console.log(currentLesson);
+    }, [fullTime, lessons, dayIndex])
+ 
     useEffect(() => {
         if (lessons[dayIndex]) {
          
