@@ -1,7 +1,8 @@
 .grades {
     text-align: center;
+
     button {
-        
+
         box-shadow:
             0.3em 0.3em 0 0 #2a9d8f,
             inset 0.3em 0.3em 0 0 #2a9d8f;
@@ -24,6 +25,7 @@
             color: #000;
         }
     }
+
     .grades-container {
         display: flex;
         flex-direction: row;
@@ -31,10 +33,11 @@
         justify-content: center;
         align-items: center;
 
-        .show-grades{
+        .show-grades {
             width: 90%;
+
             .show-grades-titles,
-            .show-grades-items{
+            .show-grades-items {
                 display: flex;
                 flex-direction: row;
                 gap: 10px;
@@ -42,42 +45,67 @@
                 justify-content: space-evenly;
                 // width: 30%;
 
-                p{
+                p {
                     text-align: center;
                     width: 33%;
                     height: 100%;
                     text-transform: uppercase;
                     font-size: 1.2rem;
                     font-weight: 700;
-                    text-shadow: 2px 2px 5px ;
+                    text-shadow: 2px 2px 5px;
                 }
             }
-            .show-grades-titles{
+
+            .show-grades-titles {
                 margin-top: 25px;
-                border: 2px solid ;
-                p{
+                border: 2px solid;
+
+                p {
                     color: #e9c46a;
-                    
+
 
                 }
             }
-            .show-grades-items{
+
+            .show-grades-items {
                 border-bottom: 2px solid;
-                P{
+
+                P {
                     color: #2a9d8f;
                 }
-                .delete{
+
+                .delete {
                     font-size: 1.2rem;
                     cursor: pointer;
                     transition: all 0.2s linear;
 
-                    &:hover{
+                    &:hover {
                         color: red;
                         transform: scale(1.2);
                     }
                 }
             }
         }
-        
+
+    }
+
+    @media screen and (max-width: 600px) {
+        h2{
+            font-size: 1.5rem;
+        }
+        .grades-container {
+            .show-grades {
+                width: 100%;
+                text-align: center;
+                
+
+                .show-grades-titles,
+                .show-grades-items {
+                    p{
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
     }
 }
