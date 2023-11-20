@@ -95,7 +95,7 @@
         }
         .grades-container {
             .show-grades {
-                width: 100%;
+                width: 95%;
                 text-align: center;
                 
 
@@ -103,6 +103,8 @@
                 .show-grades-items {
                     p{
                         font-size: 0.8rem;
+                        text-shadow: none;
+                        font-weight: 700;
                     }
                 }
             }

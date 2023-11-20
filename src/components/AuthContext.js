@@ -17,10 +17,12 @@ export const AuthPrivider = ({children}) =>{
             if(user){
                 setCurrentUser(user)
                 setAuthChecked(true);
+                console.log("użytkonik zalogowany")
                
             }
             else{
                 setCurrentUser('')
+                console.log("użytkonik wylogowany");
             }
         })
         
