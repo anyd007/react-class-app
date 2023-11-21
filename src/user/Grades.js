@@ -18,6 +18,7 @@ const Grades = () => {
     const [loading, setLoading] = useState(true)
     const [deleteItem, setDeleteItem] = useState('')
     const [openDeletePopup, setOpenDeletePopup] = useState(false)
+
   
     
     const getUserData = async () => {
@@ -79,8 +80,8 @@ const Grades = () => {
                         <p>ocena</p>
                     </div> }
                     {grades.map((grade) => (<div className="show-grades-items" key={grade.id}>
-                    <FaEdit className='delete'/>
-                        <p>{grade.selectedDate}</p>
+                    {/* <FaEdit className='delete'/> */}
+                        <p>{grade.selectedDate}</p> 
                         <p>{grade.subject}</p>
                         <p>{grade.grade}</p>
                         <AiFillDelete onClick={() => handleDelete(grade.id)} className='delete' />

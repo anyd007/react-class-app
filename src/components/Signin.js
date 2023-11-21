@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import '../styles/signin.scss';
-import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, googleProvider } from "../config/firebase";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import Loading from "../ui/Loading";
 
@@ -58,12 +58,23 @@ const Signin = () => {
             }
         }
     }
+    const signinWithGoogle = async () => {
+        try{
+            await signInWithPopup(auth, googleProvider)
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
     return (
 
         <div className="signin">
             { loading && <Loading  /> }
             <h2>rejestracja</h2>
             <p className="error">{txtStatus}</p>
+            <p>szybka rejestracja</p>
+            <Button value="PRZEZ GOOGLE" onClick={signinWithGoogle}/>
+            <p>lub:</p>
             <form className="signin__container" onSubmit={handleSubmit}>
                 <label>Podaj e-mail</label>
                 <input type="text"
