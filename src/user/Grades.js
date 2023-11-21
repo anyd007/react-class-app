@@ -52,7 +52,7 @@ const Grades = () => {
         setOpenPopup(true)
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = (id) => {
         setOpenDeletePopup(true)
         setDeleteItem(id)
         
