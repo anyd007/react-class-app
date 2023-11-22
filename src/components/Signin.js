@@ -1,7 +1,7 @@
 import Button from "../ui/Button";
 import '../styles/signin.scss';
 import { auth, googleProvider } from "../config/firebase";
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { useState } from "react";
 import Loading from "../ui/Loading";
 
@@ -60,7 +60,7 @@ const Signin = () => {
     }
     const signinWithGoogle = async () => {
         try{
-            await signInWithPopup(auth, googleProvider)
+            await signInWithRedirect(auth, googleProvider)
         }
         catch(err){
             console.log(err.message);
