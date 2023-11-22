@@ -53,7 +53,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
             }
 
-           else if(fullTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
+           else if(fullTime >= lessons[dayIndex].end) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 setInfoTxt("Lekcje się już skończyły 😊\n sprawdź pełny plan, wybierając z górnego menu ⬆️")
