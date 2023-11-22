@@ -4,6 +4,7 @@ import { auth, googleProvider } from "../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import Loading from "../ui/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
 
@@ -14,6 +15,7 @@ const Signin = () => {
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
 
 
@@ -61,6 +63,7 @@ const Signin = () => {
     const signinWithGoogle = async () => {
         try{
             await signInWithPopup(auth, googleProvider)
+            navigate('/users')
         }
         catch(err){
             console.log(err.message);
@@ -73,9 +76,9 @@ const Signin = () => {
             { loading && <Loading  /> }
             <h2>rejestracja</h2>
             <p className="error">{txtStatus}</p>
-            <p>szybka rejestracja</p>
+            <p>szybka:</p>
             <Button value="PRZEZ GOOGLE" onClick={signinWithGoogle}/>
-            <p>lub:</p>
+            <p>lub tradycyjna:</p>
             <form className="signin__container" onSubmit={handleSubmit}>
                 <label>Podaj e-mail</label>
                 <input type="text"

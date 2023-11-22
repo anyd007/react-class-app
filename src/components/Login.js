@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Button from "../ui/Button";
 import UserNavbar from "../user/UserNavbar";
-import {auth} from '../config/firebase'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth, googleProvider} from '../config/firebase'
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import '../styles/login.scss';
 import Loading from "../ui/Loading";
 import { useNavContext } from "./NavContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const {showPrivMenu, SetShowPrivMenu} = useNavContext()
+    const {SetShowPrivMenu} = useNavContext()
     const [emailLogin, setEmailLogin] = useState('')
     const [passwordLogin, setPasswordLogin] = useState('')
     const [checkLogin, setCheckLogin] = useState(false)
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
  
 
 
@@ -28,6 +30,9 @@ const Login = () => {
             setLoading(false)
             setTxtStatus("Logowanie udane !")
             SetShowPrivMenu(true)
+            setTimeout(() =>{
+                navigate('/users')
+            }, 500)
         }
         catch(err){
             console.log(err.code);
@@ -49,6 +54,17 @@ const Login = () => {
         }
     }
 
+    const signinWithGoogle = async () => {
+        try{
+            await signInWithPopup(auth, googleProvider)
+            navigate('/users')
+        }
+        catch(err){
+            console.log(err.message);
+            setTxtStatus("Błąd rejestacji: " + err.code)
+        }
+    }
+
     
    
     return (
@@ -57,6 +73,9 @@ const Login = () => {
         {checkLogin ? ( <UserNavbar /> ) : (
             <>
             <h2>Logowanie</h2>
+            <p>jeżeli rejestracja odbyła się przez konto google:</p>
+            <Button value="PRZEZ GOOGLE" onClick={signinWithGoogle}/>
+            <p>lub tradycyjnie:</p>
             <form className="signin__container" onSubmit={loginSubmit}>
                 <label>Podaj e-mail</label>
                 <input type="text"
