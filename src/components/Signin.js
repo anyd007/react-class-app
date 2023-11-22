@@ -64,6 +64,7 @@ const Signin = () => {
         }
         catch(err){
             console.log(err.message);
+            setTxtStatus("Błąd rejestacji: " + err.code)
         }
     }
     return (
