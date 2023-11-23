@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SortGrades = ({ grades, setGrades }) => {
     const [sortValueChoose, setSortValueChoose] = useState('')
@@ -33,7 +33,7 @@ const SortGrades = ({ grades, setGrades }) => {
                 sort = [...grades].sort((a, b) => a.subject.localeCompare(b.subject))
                 setGrades(sort)
                 break;
-            case "przemiot od: z":
+            case "przedmiot od: z":
                 sort = [...grades].sort((a, b) => b.subject.localeCompare(a.subject))
                 setGrades(sort)
                 break;
@@ -41,6 +41,9 @@ const SortGrades = ({ grades, setGrades }) => {
                 setGrades([...grades])
         }
     }
+    useEffect(() =>{
+        handleSort()
+    }, [sortValueChoose])
 
     return (
         <div className="sort-grades">
@@ -49,7 +52,7 @@ const SortGrades = ({ grades, setGrades }) => {
                 id="sort-grades"
                 value={sortValueChoose}
                 onChange={(e) => setSortValueChoose(e.target.value)}
-                onClick={handleSort}
+               
             >  <option value=""></option>
                 <option value="ocena od nawyzszej">ocena od nawyższej</option>
                 <option value="ocena od najnizszej">ocena od najniższej</option>
