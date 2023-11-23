@@ -95,14 +95,14 @@ const Signin = () => {
                     required
                 />
                 <label>Podaj hasło</label>
-                <input type="text"
+                <input type="password"
                     placeholder="hasło..."
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
                 <label>Powtórz hasło</label>
-                <input type="text"
+                <input type="password"
                     placeholder="hasło..."
                     value={repassword}
                     onChange={(e) => setRepassword(e.target.value)}
