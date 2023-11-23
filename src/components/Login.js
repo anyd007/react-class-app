@@ -85,7 +85,7 @@ const Login = () => {
                     required
                 />
                 <label>Podaj hasło</label>
-                <input type="text"
+                <input type="password"
                     placeholder="hasło..."
                     value={passwordLogin}
                     onChange={(e) => setPasswordLogin(e.target.value)}
