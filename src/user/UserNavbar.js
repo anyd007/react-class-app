@@ -1,5 +1,4 @@
 
-import { useEffect, useState } from "react";
 import '../styles/usernavbar.scss';
 import Grades from "./Grades";
 import { useAuthContext } from "../components/AuthContext";

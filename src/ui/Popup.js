@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import '../styles/popup.scss';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';

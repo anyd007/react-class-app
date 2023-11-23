@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/grades.scss'
 import { db, auth } from "../config/firebase"
-import { getDocs, collection, where, query, deleteDoc, doc } from "firebase/firestore";
+import { getDocs, collection, where, query} from "firebase/firestore";
 import AddGradesPopup from '../ui/AddGradesPopup';
 import { useNavContext } from '../components/NavContext';
 import { useAuthContext } from "../components/AuthContext";
@@ -21,7 +21,7 @@ const Grades = () => {
     const [openDeletePopup, setOpenDeletePopup] = useState(false)
 
   
-    
+    //pobranie danych z firestorm
     const getUserData = async () => {
         if (currentUser) {
             try {
@@ -71,7 +71,7 @@ const Grades = () => {
            {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData}/> }
             <h2>oceny twojego dziecka</h2>
             <button onClick={handleOpenPopup}>dodaj ocenę</button>
-            <SortGrades grades={grades}/>
+            <SortGrades grades={grades} setGrades={setGrades}/>
             <div className='grades-container'>
                 {openPopup && <AddGradesPopup />}
                 <div className="show-grades" >
