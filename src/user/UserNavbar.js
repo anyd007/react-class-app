@@ -3,6 +3,7 @@ import '../styles/usernavbar.scss';
 import Grades from "./Grades";
 import { useAuthContext } from "../components/AuthContext";
 
+
 const UserNavbar = () => {
     const { currentUser } = useAuthContext()
 

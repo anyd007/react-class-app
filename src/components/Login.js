@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Button from "../ui/Button";
 import UserNavbar from "../user/UserNavbar";
-import {auth, googleProvider} from '../config/firebase'
+import { auth, googleProvider } from '../config/firebase'
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import '../styles/login.scss';
 import Loading from "../ui/Loading";
@@ -9,72 +9,70 @@ import { useNavContext } from "./NavContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const {SetShowPrivMenu} = useNavContext()
+    const { SetShowPrivMenu } = useNavContext()
     const [emailLogin, setEmailLogin] = useState('')
     const [passwordLogin, setPasswordLogin] = useState('')
-    const [checkLogin, setCheckLogin] = useState(false)
     const [errorTxt, setErrorTxt] = useState('')
     const [txtStatus, setTxtStatus] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
- 
 
 
-    const loginSubmit = async (e) =>{
+
+    const loginSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-       
-        try{
+
+        try {
             await signInWithEmailAndPassword(auth, emailLogin, passwordLogin)
-            setCheckLogin(true)
+
             setLoading(false)
             setTxtStatus("Logowanie udane !")
             SetShowPrivMenu(true)
-            setTimeout(() =>{
-                navigate('/users')
-            }, 500)
+            navigate('/users')
+
         }
-        catch(err){
+        catch (err) {
             console.log(err.code);
-            if(err.code === "auth/invalid-email"){
+            if (err.code === "auth/invalid-email") {
                 setErrorTxt("błędny email ")
             }
-            else if(err.code === "auth/missing-password"){
+            else if (err.code === "auth/missing-password") {
                 setErrorTxt("niewłaściew hasło ")
             }
-            else if(err.code === "auth/invalid-login-credentials"){
+            else if (err.code === "auth/invalid-login-credentials") {
                 setErrorTxt("Nieprawidłowe dane logowania ")
             }
-            else{
+            else {
                 setErrorTxt("błąd logowania " + err.message)
             }
 
-            setCheckLogin(false)
+
             setLoading(false)
         }
     }
 
     const signinWithGoogle = async () => {
-        try{
+        try {
             await signInWithPopup(auth, googleProvider)
             navigate('/users')
         }
-        catch(err){
+        catch (err) {
             console.log(err.message);
             setTxtStatus("Błąd rejestacji: " + err.code)
         }
     }
 
-    
-   
+
+
     return (
         <div className="login">
             {loading && <Loading />}
-        {checkLogin ? ( <UserNavbar /> ) : (
-            <>
+
+
             <h2>Logowanie</h2>
             <p>jeżeli rejestracja odbyła się przez konto google:</p>
-            <Button value="PRZEZ GOOGLE" onClick={signinWithGoogle}/>
+            <Button value="PRZEZ GOOGLE" onClick={signinWithGoogle} />
             <p>lub tradycyjnie:</p>
             <form className="signin__container" onSubmit={loginSubmit}>
                 <label>Podaj e-mail</label>
@@ -91,15 +89,15 @@ const Login = () => {
                     onChange={(e) => setPasswordLogin(e.target.value)}
                     required
                 />
-               
+
                 <Button value="LOGOWANIE" />
             </form>
             <p className="error-txt">{errorTxt}</p>
-            </>
-        )}
-        
+
+
+
         </div>
     );
 }
- 
+
 export default Login;

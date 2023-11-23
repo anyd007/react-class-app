@@ -10,16 +10,17 @@ import { FaEdit } from "react-icons/fa";
 import Loading from '../ui/Loading';
 import DeletePopup from '../ui/DeletePopup';
 import SortGrades from './SortGrades';
+import  { useNavigate }  from 'react-router-dom';
 
 const Grades = () => {
     const userCollectioRef = collection(db, "users")
     const { currentUser } = useAuthContext()
-    const { openPopup, setOpenPopup } = useNavContext()
-    const [grades, setGrades] = useState([])
+    const { openPopup, setOpenPopup, grades, setGrades} = useNavContext()
     const [loading, setLoading] = useState(true)
     const [deleteItem, setDeleteItem] = useState('')
     const [openDeletePopup, setOpenDeletePopup] = useState(false)
-
+   
+    const navigate = useNavigate()
 
     //pobranie danych z firestorm
     const getUserData = async () => {
@@ -54,6 +55,11 @@ const Grades = () => {
         setOpenPopup(true)
     }
 
+    const handleOpenGradesDeatalis = () => {
+        navigate('/users/grades-detalis')
+
+    }
+
     const handleDelete = (id) => {
         setOpenDeletePopup(true)
         setDeleteItem(id)
@@ -66,7 +72,7 @@ const Grades = () => {
             {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData} />}
             <h2>oceny twojego dziecka</h2>
             <div className="grades-nav">
-            {grades.length <= 1 ? null : <button>zobacz szczegóły</button> }
+            {grades.length <= 1 ? null : <button onClick={handleOpenGradesDeatalis}>zobacz szczegóły</button> }
                 <button onClick={handleOpenPopup}>dodaj ocenę</button>
                 {grades.length <= 1 ? null : <SortGrades className="sort-grades" grades={grades} setGrades={setGrades} />}
             </div>

@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import { NavContextProvider } from "./components/NavContext"
 import { AuthPrivider } from "./components/AuthContext";
 import UserNavbar from "./user/UserNavbar";
+import GradesDetalis from "./user/GradesDetalis";
 
 
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/signin" element={<Signin />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/users/*" element={<UserNavbar />}/>
+              <Route path="/users/grades-detalis" element={<GradesDetalis/>} />
             </Routes>
           </Router>
         </AuthPrivider>
