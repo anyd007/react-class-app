@@ -9,6 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 import Loading from '../ui/Loading';
 import DeletePopup from '../ui/DeletePopup';
+import SortGrades from './SortGrades';
 
 const Grades = () => {
     const userCollectioRef = collection(db, "users")
@@ -70,6 +71,7 @@ const Grades = () => {
            {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData}/> }
             <h2>oceny twojego dziecka</h2>
             <button onClick={handleOpenPopup}>dodaj ocenę</button>
+            <SortGrades grades={grades}/>
             <div className='grades-container'>
                 {openPopup && <AddGradesPopup />}
                 <div className="show-grades" >
