@@ -47,7 +47,7 @@ const SortGrades = ({ grades, setGrades }) => {
 
     return (
         <div className="sort-grades">
-            <label>sortuj według:</label>
+            <label>sortuj według:</label><br/>
             <select
                 id="sort-grades"
                 value={sortValueChoose}

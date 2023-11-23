@@ -1,5 +1,18 @@
 .grades {
     text-align: center;
+    position: relative;
+
+    .grades-nav {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        flex-wrap: wrap;
+        gap: 10px;
+
+    }
 
     button {
 
@@ -89,19 +102,36 @@
 
     }
 
+    @media screen and (max-width: 700px) {
+        .grades-nav {
+            font-size: 12px;
+            min-width: 60px;
+            justify-content: center;
+
+            button {
+                font-size: 12px;
+                min-width: 60px;
+            }
+            .sort-grades{
+                flex-basis: 100%;
+            }
+        }
+    }
+
     @media screen and (max-width: 600px) {
-        h2{
+        h2 {
             font-size: 1.5rem;
         }
+
         .grades-container {
             .show-grades {
                 width: 95%;
                 text-align: center;
-                
+
 
                 .show-grades-titles,
                 .show-grades-items {
-                    p{
+                    p {
                         font-size: 0.8rem;
                         text-shadow: none;
                         font-weight: 700;

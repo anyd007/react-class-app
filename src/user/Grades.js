@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/grades.scss'
 import { db, auth } from "../config/firebase"
-import { getDocs, collection, where, query} from "firebase/firestore";
+import { getDocs, collection, where, query } from "firebase/firestore";
 import AddGradesPopup from '../ui/AddGradesPopup';
 import { useNavContext } from '../components/NavContext';
 import { useAuthContext } from "../components/AuthContext";
@@ -20,7 +20,7 @@ const Grades = () => {
     const [deleteItem, setDeleteItem] = useState('')
     const [openDeletePopup, setOpenDeletePopup] = useState(false)
 
-  
+
     //pobranie danych z firestorm
     const getUserData = async () => {
         if (currentUser) {
@@ -57,33 +57,31 @@ const Grades = () => {
     const handleDelete = (id) => {
         setOpenDeletePopup(true)
         setDeleteItem(id)
-        
-    }
 
-    const subtitleSort = () =>{
-       let sort =  [...grades].sort((a,b) => a.subject.localeCompare(b.subject))
-        setGrades(sort)
     }
 
     return (
         <div className="grades">
             {loading && <Loading />}
-           {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData}/> }
+            {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData} />}
             <h2>oceny twojego dziecka</h2>
-            <button onClick={handleOpenPopup}>dodaj ocenę</button>
-            <SortGrades grades={grades} setGrades={setGrades}/>
+            <div className="grades-nav">
+            {grades.length <= 1 ? null : <button>zobacz szczegóły</button> }
+                <button onClick={handleOpenPopup}>dodaj ocenę</button>
+                {grades.length <= 1 ? null : <SortGrades className="sort-grades" grades={grades} setGrades={setGrades} />}
+            </div>
             <div className='grades-container'>
                 {openPopup && <AddGradesPopup />}
                 <div className="show-grades" >
-                   
-                    {grades.length == 0 ? null : <div className="show-grades-titles">
+
+                    {grades.length === 0 ? null : <div className="show-grades-titles">
                         <p >data</p>
-                        <p onClick={subtitleSort}>przedmiot</p>
+                        <p>przedmiot</p>
                         <p>ocena</p>
-                    </div> }
+                    </div>}
                     {grades.map((grade) => (<div className="show-grades-items" key={grade.id}>
-                    {/* <FaEdit className='delete'/> */}
-                        <p>{grade.selectedDate}</p> 
+                        {/* <FaEdit className='delete'/> */}
+                        <p>{grade.selectedDate}</p>
                         <p>{grade.subject}</p>
                         <p>{grade.grade}</p>
                         <AiFillDelete onClick={() => handleDelete(grade.id)} className='delete' />
