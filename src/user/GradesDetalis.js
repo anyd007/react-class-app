@@ -11,7 +11,7 @@ const GradesDetalis = () => {
     const [gradesBySubject, setGradesBySubject] = useState({});
     const { grades, loading } = useFirebase()
     const [subjectDetalis, setSubjectDetalis] = useState('')
-    
+
 
     const extractGradesBySubject = () => {
         if (grades.length !== 0) {
@@ -47,7 +47,7 @@ const GradesDetalis = () => {
             {loading && <Loading />}
             <h2>szczegóły ocen</h2>
             <p>wybierz z listy rozwijanej przedmiot który Cię interesuje</p>
-            <FaBackspace className='back' onClick={handleBack}/>
+            <FaBackspace className='back' onClick={handleBack} />
 
             <select
                 value={subjectDetalis}
@@ -57,14 +57,18 @@ const GradesDetalis = () => {
                     <option key={index} value={subject}>{subject}</option>
                 ))}
             </select>
-           
+
             {Object.keys(gradesBySubject).map((subject, index) => (
                 <div key={index}>
                     {subjectDetalis !== subject ? null :
-                    <>
-                     <h2>{subjectDetalis}</h2>
-                    <p>{gradesBySubject[subject]}</p>
-                    </>
+                        <>
+                            <h2>{subjectDetalis}</h2>
+
+
+                            <div className="subject-grades" >
+                                {gradesBySubject[subject].map((grade, index) => (<p key={index}>{grade}</p>))}
+                            </div>
+                        </>
                     }
                 </div>
             ))}
