@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../ui/Loading';
 import useFirebase from '../config/useFirebase';
+import '../styles/grade-details.scss';
 
 const GradesDetalis = () => {
 
     const navigate = useNavigate()
     const [gradesBySubject, setGradesBySubject] = useState({});
-    const {grades, loading} = useFirebase()
+    const { grades, loading } = useFirebase()
+    const [subjectDetalis, setSubjectDetalis] = useState('')
+    const [showDetalis, setShowDetalis] = useState([])
 
     const extractGradesBySubject = () => {
-        {loading && <Loading />}
         if (grades.length !== 0) {
             const gradesBySubjectObj = {};
 
@@ -33,26 +35,40 @@ const GradesDetalis = () => {
         extractGradesBySubject();
     }, [grades]);
 
-    console.log(gradesBySubject);
-
 
     const handleBack = () => {
         navigate("/users")
     }
+
+
     return (
         <div className="grades-details">
-            <h2>szczegóły</h2>
+            {loading && <Loading />}
+            <h2>szczegóły ocen</h2>
+            <p>wybierz z listy rozwijanej przedmiot który Cię interesuje</p>
             <button onClick={handleBack}>wróć</button>
-            {Object.keys(gradesBySubject).map((subject, index) => (
-                <>
-                    <h2>{subject}</h2>
-                    <p>{gradesBySubject[subject]}</p>
-                </>
-            ))}
+
             <label>wybierz</label>
-            <select>
-            {Object.keys(gradesBySubject).map((subject, index) => ( <option value={subject}>{subject}</option>))}
+            <select
+                value={subjectDetalis}
+                onChange={(e) => setSubjectDetalis(e.target.value)}
+            >
+                {Object.keys(gradesBySubject).map((subject, index) => (
+                    <option key={index} value={subject}>{subject}</option>
+                ))}
             </select>
+           
+            {Object.keys(gradesBySubject).map((subject, index) => (
+                <div key={index}>
+                    {subjectDetalis !== subject ? null :
+                    <>
+                     <h2>{subjectDetalis}</h2>
+                    <p>{gradesBySubject[subject]}</p>
+                    </>
+                    }
+                </div>
+            ))}
+
         </div>
     );
 }
