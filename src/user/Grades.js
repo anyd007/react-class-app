@@ -1,54 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../styles/grades.scss'
-import { db, auth } from "../config/firebase"
-import { getDocs, collection, where, query } from "firebase/firestore";
 import AddGradesPopup from '../ui/AddGradesPopup';
 import { useNavContext } from '../components/NavContext';
-import { useAuthContext } from "../components/AuthContext";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 import Loading from '../ui/Loading';
 import DeletePopup from '../ui/DeletePopup';
 import SortGrades from './SortGrades';
 import  { useNavigate }  from 'react-router-dom';
+import useFirebase from '../config/useFirebase';
 
 const Grades = () => {
-    const userCollectioRef = collection(db, "users")
-    const { currentUser } = useAuthContext()
-    const { openPopup, setOpenPopup, grades, setGrades} = useNavContext()
-    const [loading, setLoading] = useState(true)
-    const [deleteItem, setDeleteItem] = useState('')
-    const [openDeletePopup, setOpenDeletePopup] = useState(false)
+    const { openPopup, setOpenPopup, openDeletePopup, setOpenDeletePopup} = useNavContext()
+    const [deleteItem, setDeleteItem, ] = useState('')
+    const {grades, setGrades, loading} = useFirebase()
    
     const navigate = useNavigate()
-
-    //pobranie danych z firestorm
-    const getUserData = async () => {
-        if (currentUser) {
-            try {
-                const userId = auth?.currentUser?.uid;
-
-                const data = await getDocs(query(userCollectioRef, where("userId", "==", userId)));
-
-                const filterData = data.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id
-                }))
-                setGrades(filterData)
-                setLoading(false)
-
-            }
-
-            catch (err) {
-                console.log(err);
-                setLoading(false)
-            }
-        }
-    }
-    useEffect(() => {
-        getUserData();
-        console.log("lekcja dodana");
-    }, [currentUser, openPopup]);
 
 
     const handleOpenPopup = () => {
@@ -65,11 +32,11 @@ const Grades = () => {
         setDeleteItem(id)
 
     }
-
+   
     return (
         <div className="grades">
             {loading && <Loading />}
-            {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} getUserData={getUserData} />}
+            {openDeletePopup && <DeletePopup setOpenDeletePopup={setOpenDeletePopup} deleteItem={deleteItem} />}
             <h2>oceny twojego dziecka</h2>
             <div className="grades-nav">
             {grades.length <= 1 ? null : <button onClick={handleOpenGradesDeatalis}>zobacz szczegóły</button> }

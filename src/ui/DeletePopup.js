@@ -1,27 +1,31 @@
 import '../styles/delete-popup.scss';
 import { db } from '../config/firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
+import useFirebase from '../config/useFirebase';
+import { useEffect } from 'react';
 
 
-const DeletePopup = ({setOpenDeletePopup, deleteItem, getUserData}) => {
+const DeletePopup = ({ setOpenDeletePopup, deleteItem}) => {
+    const { getUserData } = useFirebase()
 
-    const handleNo =() => {
+    const handleNo = () => {
         setOpenDeletePopup(false)
-     
-    }
 
+    }
+    
     const handleYes = async () => {
-        try{
+        try {
             const gradieDoc = doc(db, "users", deleteItem)
             await deleteDoc(gradieDoc)
-            getUserData();
+            await getUserData()
             console.log("element został usunięty ");
             setOpenDeletePopup(false)
         }
-        catch(err){
+        catch (err) {
             console.log("nie udało się usunąć pozycji: " + err.message);
         }
     }
+    
     return (
         <div className="delete-popup">
             <div className="delete-item">
@@ -32,5 +36,5 @@ const DeletePopup = ({setOpenDeletePopup, deleteItem, getUserData}) => {
         </div>
     );
 }
- 
+
 export default DeletePopup;

@@ -34,11 +34,11 @@ const AddGradesPopup = () => {
                 userId
             });
 
-            console.log('Wydarzenie zostało dodane.');
+            console.log('ocena została dodana.');
             setOpenPopup(false)
         }
         catch (err) {
-            console.error('Błąd podczas dodawania wydarzenia:', err.message);
+            console.error('Błąd podczas dodawania oceny:', err.message);
         }
     }
 

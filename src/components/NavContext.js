@@ -6,10 +6,9 @@ const NavContext = createContext()
 export const NavContextProvider = ({children}) =>{
     const [showPrivMenu, SetShowPrivMenu] = useState(false);
     const [openPopup, setOpenPopup] = useState(false)
-    const [grades, setGrades] = useState([])
-
+    const [openDeletePopup, setOpenDeletePopup] = useState(false)
     return (
-        <NavContext.Provider value={{showPrivMenu, SetShowPrivMenu, openPopup, setOpenPopup, grades, setGrades}}>
+        <NavContext.Provider value={{showPrivMenu, SetShowPrivMenu, openPopup, setOpenPopup, openDeletePopup, setOpenDeletePopup}}>
             {children}
         </NavContext.Provider>
     )
