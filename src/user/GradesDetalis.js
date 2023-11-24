@@ -88,11 +88,11 @@ console.log(fullDate);
                             <div className="subject-grades" >
                                 {gradesBySubject[subject].map((grade, index) => (
                                     <p className='grande-txt' key={index}>
-                                        {gradesBySubject[subject].length <= 1 ? grade : `${grade}.`}
+                                        {gradesBySubject[subject].length <= 1 ? grade : `${grade},`}
                                     </p>
                                 ))}
                             </div>
-                            <p>{`cena końcowa na dzień: ${fullDate}`}</p>
+                            <p>{`ocena końcowa na dzień: ${fullDate}`}</p>
                             <p className='grande-txt'>{makeAverage}</p>
                         </>
                     }
