@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../ui/Loading';
 import useFirebase from '../config/useFirebase';
+import { FaBackspace } from "react-icons/fa";
 import '../styles/grade-details.scss';
 
 const GradesDetalis = () => {
@@ -10,7 +11,7 @@ const GradesDetalis = () => {
     const [gradesBySubject, setGradesBySubject] = useState({});
     const { grades, loading } = useFirebase()
     const [subjectDetalis, setSubjectDetalis] = useState('')
-    const [showDetalis, setShowDetalis] = useState([])
+    
 
     const extractGradesBySubject = () => {
         if (grades.length !== 0) {
@@ -46,9 +47,8 @@ const GradesDetalis = () => {
             {loading && <Loading />}
             <h2>szczegóły ocen</h2>
             <p>wybierz z listy rozwijanej przedmiot który Cię interesuje</p>
-            <button onClick={handleBack}>wróć</button>
+            <FaBackspace className='back' onClick={handleBack}/>
 
-            <label>wybierz</label>
             <select
                 value={subjectDetalis}
                 onChange={(e) => setSubjectDetalis(e.target.value)}
