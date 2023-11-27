@@ -46,7 +46,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             let startDinnerTime = dinnerTimeParts[0]
            console.log(fullTime);
             console.log("początek obiadu: " + startDinnerTime, "koniec obiadu: " + finishDinnerTime, "koniec lekcji:" +lessons[dayIndex].end);
-            if (fullTime >= lessons[dayIndex].end && startDinnerTime >= lessons[dayIndex].end || finishDinnerTime <= lessons[dayIndex].end) {
+            if (fullTime >= lessons[dayIndex].end && startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 

@@ -32,7 +32,7 @@ const Grades = () => {
         setDeleteItem(id)
 
     }
-   
+    
     return (
         <div className="grades">
             {loading && <Loading />}
