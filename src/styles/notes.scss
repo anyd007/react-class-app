@@ -69,6 +69,13 @@
                 font-size: 1.5rem;
                 cursor: pointer;
             }
+            p{
+                max-width: 95%;
+                font-size: 1.2rem;
+                text-align: center;
+                margin: 10px 0;
+                word-wrap: break-word;
+            }
         }
     }
 }
