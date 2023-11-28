@@ -1,6 +1,6 @@
 import '../styles/add-grades-popup.scss';
 import { useNavContext } from '../components/NavContext';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../config/firebase';
 import { useState } from 'react';
 
@@ -15,24 +15,21 @@ const AddGradesPopup = () => {
     
         try {
             const userId = auth?.currentUser?.uid;
-            const eventsRef = collection(db, 'users');
-            // Przekształć datę z pola input type selectedDate na obiekt JavaScript Date
-            const selectedDateObject = new Date(selectedDate);
+       // Utwórz referencję do kolekcji ocen danego użytkownika
+       const gradesCollection = collection(db, 'users', userId, 'grades');
 
-             // Przekształć grade na liczbę
-        const gradeNumber = parseFloat(grade);
 
-            // Utwórz Timestamp z obiektu Date
-            const timestamp = Timestamp.fromDate(selectedDateObject);
+        // Przekształć grade na liczbę
+       const gradeNumber = parseFloat(grade);
 
-            // Dodaj nowe wydarzenie do podkolekcji
-            await addDoc(eventsRef, {
-                selectedDate,
-                dateDate: timestamp,
-                subject,
-                grade: gradeNumber,
-                userId
-            });
+
+       // Dodaj nowe wydarzenie do kolekcji
+       await addDoc(gradesCollection, {
+           selectedDate,
+           dateDate: serverTimestamp(),
+           subject,
+           grade: gradeNumber,
+       });
 
             console.log('ocena została dodana.');
             setOpenPopup(false)

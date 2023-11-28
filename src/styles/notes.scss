@@ -12,6 +12,9 @@
         text-shadow: 2px 2px 6px;
         padding: 0 10px;
     }
+    h3{
+        text-transform: uppercase;
+    }
     button {
         box-shadow:
             0.3em 0.3em 0 0 #2a9d8f,
@@ -37,6 +40,7 @@
     }
 
     .notes-container{
+    
         .back{
             font-size: 3rem;
             cursor: pointer;
@@ -44,6 +48,27 @@
             position: absolute;
             left: 4%;
             top: 5%;
+        }
+
+        .notes-items{
+            position: relative;
+            margin: 10px auto;
+            width: 80%;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .done{
+                position: absolute;
+                top: 6%;
+                right: 4%;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
         }
     }
 }

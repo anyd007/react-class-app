@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, Timestamp, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../config/firebase';
 import { useNavContext } from '../components/NavContext';
 import '../styles/add-note-popup.scss'
@@ -16,17 +16,13 @@ const handleSubmit = async (e) => {
     
     try {
         const userId = auth?.currentUser?.uid;
-        const eventsRef = collection(db, 'users');
-        // Przekształć datę z pola input type selectedDate na obiekt JavaScript Date
-        const selectedDateObject = new Date(noteDate);
-
-        // Utwórz Timestamp z obiektu Date
-        const timestamp = Timestamp.fromDate(selectedDateObject);
+        const notesRef = collection(db, 'users', userId, "notes");
 
         // Dodaj nowe wydarzenie do podkolekcji
-        await addDoc(eventsRef, {
+        await addDoc(notesRef, {
             noteTitle,
-            noteDate: timestamp,
+            serverDate: serverTimestamp(),
+            remindDate: Timestamp.fromDate(new Date(noteDate)),
             noteTxt,
             userId
         });

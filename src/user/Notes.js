@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaBackspace } from "react-icons/fa";
+import { MdDoneOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import AddNotepopup from "../ui/AddNotePopuop";
 import { useNavContext } from '../components/NavContext';
@@ -10,7 +11,7 @@ import '../styles/notes.scss';
 const Notes = () => {
     const navigate = useNavigate()
     const { openPopup, setOpenPopup } = useNavContext()
-    const { grades, setGrades, loading } = useFirebase()
+    const { notes, loading } = useFirebase()
 
     const handleBack = () => {
         navigate("/users")
@@ -28,9 +29,10 @@ const Notes = () => {
                 </div>
                 <FaBackspace className='back' onClick={handleBack} />
                 <button onClick={handleopenPopup}>dodaj przypomnienie</button>
-                {grades && grades.map((grade, index) => (<div className="notes-items">
-                        <h3>{grade.noteTitle}</h3>
-                        <p>{grade.noteTxt}</p>
+                {notes && notes.map((note, index) => (<div className="notes-items" key={index}>
+                        <h3>{note.noteTitle}</h3>
+                        <p>{note.noteTxt}</p>
+                        <MdDoneOutline className="done" />
                 </div>
                 ))}
             </div>
