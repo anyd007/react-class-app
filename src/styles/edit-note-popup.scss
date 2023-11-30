@@ -7,11 +7,48 @@
     background-color: rgba(250, 243, 231, 0.9);
     z-index: 5;
     overflow: auto;
+    text-align: center;
 
     .clouse-btn {
         position: absolute;
         right: 5%;
         top: 5%;
+
+    }
+    select,
+    input,
+    textarea {
+        width: 50%;
+        box-shadow:
+            0.3em 0.3em 0 0 #e9c46a,
+            inset 0.3em 0.3em 0 0 #e9c46a;
+        background: none;
+        border: none;
+        transition: 0.25s;
+        font-size: 20px;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        color: #2a9d8f;
+
+        font-weight: 700;
+        min-width: 180px;
+        outline: none;
+        margin-bottom: 40px;
+        
+
+    }
+    @media screen and (max-width: 600px) {
+
+     
+
+            select,
+            input,
+            textarea {
+                width: 85%;
+                font-size: 15px;
+
+            }
+        
 
     }
 }
