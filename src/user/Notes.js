@@ -9,11 +9,13 @@ import useFirebase from "../config/useFirebase";
 import Loading from "../ui/Loading";
 
 import '../styles/notes.scss';
+import EditNotePopup from "../ui/EditNotePopup";
 
 const Notes = () => {
     const navigate = useNavigate()
-    const { openPopup, setOpenPopup } = useNavContext()
+    const { openPopup, setOpenPopup, openEditPopup, setOpenEditPopup } = useNavContext()
     const { notes, loading } = useFirebase()
+    
     const [editItem, setEditItem] = useState({
         id: '',
         title: '',
@@ -36,17 +38,15 @@ const Notes = () => {
             id,
             title
         })
-
+        setOpenEditPopup(true)
     }
     const handleOpenEditTxt = (id, txt) => {
         setEditItem({
             id,
             txt
         })
-
+        setOpenEditPopup(true)
     }
-
-    console.log(editItem);
 
     return (
         <div className="notes">
@@ -69,6 +69,7 @@ const Notes = () => {
                     </div>
                 ))}
             </div>
+             {openEditPopup && <EditNotePopup setOpenEditPopup={setOpenEditPopup} editItem={editItem}/> }   
         </div>
     );
 }

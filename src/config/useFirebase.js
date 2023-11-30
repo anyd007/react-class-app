@@ -6,10 +6,11 @@ import { useState, useEffect } from "react";
 
 const useFirebase = () => {
     const { currentUser } = useAuthContext()
-    const { openPopup, openDeletePopup } = useNavContext()
+    const { openPopup, openDeletePopup, openEditPopup, setOpenEditPopup } = useNavContext()
     const [grades, setGrades] = useState([])
     const [notes, setNotes] = useState([])
     const [loading, setLoading] = useState(true)
+  
 
    
 
@@ -46,7 +47,7 @@ const useFirebase = () => {
     }
     useEffect(() => {
         getUserData();
-    }, [currentUser, openPopup, openDeletePopup]); 
+    }, [currentUser, openPopup, openDeletePopup, openEditPopup]); 
   
     return {notes, grades, setGrades, loading, getUserData};
 }

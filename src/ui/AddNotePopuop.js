@@ -35,8 +35,13 @@ const handleSubmit = async (e) => {
     }
 }
 
+const handleClousePopup = () => {
+    setOpenPopup(false)
+}
+
     return (
         <div className="add-note">
+              <button onClick={handleClousePopup} className='clouse-btn'>zamknij</button>
             <form onSubmit={handleSubmit} className="add-note-container">
                 <h2>dodaj przypomnienie</h2>
                 <label>nazwa przypomnienia</label>
