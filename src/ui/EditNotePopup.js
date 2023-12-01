@@ -1,19 +1,20 @@
 import { doc, updateDoc } from 'firebase/firestore';
 import useFirebase from '../config/useFirebase';
 import '../styles/edit-note-popup.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { db, auth } from '../config/firebase';
 import Loading from './Loading';
 
 const EditNotePopup = ({ setOpenEditPopup, editItem }) => {
     const [editTitle, setEditTitle] = useState('')
     const [editTxt, setEditTxt] = useState('')
-    const {loading} = useFirebase();
+    const { loading } = useFirebase();
 
     const handleClousePopup = () => {
         setOpenEditPopup(false)
     }
     const handleApplyEdit = async () => {
+        if(!editTitle && !editTxt) return
         try {
             const userId = auth?.currentUser?.uid;
             const noteTitle = doc(db, "users", userId, "notes", editItem.id)
@@ -29,11 +30,11 @@ const EditNotePopup = ({ setOpenEditPopup, editItem }) => {
             console.error('Błąd podczas zmiany daych:', err.message);
         }
     }
-
+  
     return (
         <div className="edit-note-popup">
-            {loading && <Loading/>}
-         
+            {loading && <Loading />}
+
             <div className="edit-note-popup__container">
                 <div className="edit-note-popup__container__header">
                     <h2>Edytuj przypomnienie</h2>
@@ -42,29 +43,33 @@ const EditNotePopup = ({ setOpenEditPopup, editItem }) => {
                     {editItem.title ? <div>
                         <h3>dotychczasowy tytuł przypomnienia:</h3>
                         <p>{editItem.title}</p>
-                        <h3>nowy tytuł przypomnienia:</h3>
+                        <h3>nowy tytuł przypomnienia:<br/>(pole nie może być puste)</h3>
                         <input
                             type="text"
                             maxLength="50"
                             placeholder='podaj nowy tytuł....'
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                        /><br/>
-                        <button onClick={handleApplyEdit}>zatwierdź</button>
-                        <button onClick={handleClousePopup}>odrzuć</button>
+                        /><br />
+                        <div className="btn-container">
+                           <button onClick={handleApplyEdit}>zatwierdź</button>
+                            <button onClick={handleClousePopup}>odrzuć</button>
+                        </div>
                     </div> : null}
                     {editItem.txt ? <div>
                         <h3>dotychczasowy tekst przypomnienia:</h3>
                         <p>{editItem.txt}</p>
-                        <h3>nowy tekst przypomnienia:</h3>
+                        <h3>nowy tekst przypomnienia:<br/>(pole nie może byc puste)</h3>
                         <textarea
                             maxLength="200"
                             placeholder='podaj nowy tekst....'
                             value={editTxt}
                             onChange={(e) => setEditTxt(e.target.value)}
-                        ></textarea><br/>
-                        <button onClick={handleApplyEdit}>zatwierdź</button>
-                        <button onClick={handleClousePopup}>odrzuć</button>
+                        ></textarea><br />
+                        <div className="btn-container">
+                            <button onClick={handleApplyEdit}>zatwierdź</button>
+                            <button onClick={handleClousePopup}>odrzuć</button>
+                        </div>
                     </div> : null}
                 </div>
             </div>

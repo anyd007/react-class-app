@@ -15,6 +15,26 @@
         top: 5%;
 
     }
+   h3{
+    text-align: center;
+    margin: 0 auto;
+    line-height: 20px;
+
+   }
+   p{
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: tomato;
+   }
+   &__container__body{
+     .btn-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+     }
+   }
     select,
     input,
     textarea {
@@ -39,13 +59,16 @@
     }
     @media screen and (max-width: 600px) {
 
-     
+            h3{
+                margin-bottom: 1rem;
+            }
 
             select,
             input,
             textarea {
-                width: 85%;
+                width: 65%;
                 font-size: 15px;
+                padding: 5px 10px;;
 
             }
         

@@ -48,6 +48,15 @@ const Notes = () => {
         setOpenEditPopup(true)
     }
 
+    const handleDone = (id, index) => {
+        notes.forEach((note, noteIndex) => {
+            if (note.id === id) {
+               console.log(noteIndex);
+            }
+        })
+          
+    }
+
     return (
         <div className="notes">
             {openPopup && <AddNotepopup />}
@@ -64,7 +73,7 @@ const Notes = () => {
                         <h3>{note.noteTitle}</h3>
                         <p>{note.noteTxt}</p>
                         <FaEdit className="edit-txt" onClick={() => handleOpenEditTxt(note.id, note.noteTxt)} />
-                        <MdDoneOutline className="done" />
+                        <MdDoneOutline onClick={() => handleDone(note.id, index)} className="done" />
 
                     </div>
                 ))}

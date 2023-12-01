@@ -49,7 +49,7 @@ const useFirebase = () => {
         getUserData();
     }, [currentUser, openPopup, openDeletePopup, openEditPopup]); 
   
-    return {notes, grades, setGrades, loading, getUserData};
+    return {notes, grades, setGrades, loading, setLoading, getUserData};
 }
  
 export default useFirebase;

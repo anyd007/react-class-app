@@ -83,14 +83,17 @@
     @media screen and (max-width: 600px) {
 
         .add-note-container {
-
+            label{
+                font-size: 15px;
+                color: #2a9d8f;
+            }
             select,
             input,
             textarea {
-                width: 85%;
+                width: 65%;
                 font-size: 15px;
-
-            }
+                padding: 5px 10px;
+            }   
         }
 
     }
