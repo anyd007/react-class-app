@@ -42,11 +42,12 @@ const CurrentDayLesson = ({ lessons, loading }) => {
         if (lessons[dayIndex]) {
          
             let dinnerTimeParts = lessons[dayIndex].dinner.split(' - ')
-            let finishDinnerTime = dinnerTimeParts[1]
-            let startDinnerTime = dinnerTimeParts[0]
-           console.log(fullTime);
-            console.log("początek obiadu: " + startDinnerTime, "koniec obiadu: " + finishDinnerTime, "koniec lekcji:" +lessons[dayIndex].end);
-            if (fullTime >= lessons[dayIndex].end && startDinnerTime >= lessons[dayIndex].end && finishDinnerTime <= lessons[dayIndex].end) {
+            let finishDinnerTime = dinnerTimeParts[1].replace(":", ".")
+            let startDinnerTime = dinnerTimeParts[0].replace(":", ".")
+            let endTime = lessons[dayIndex].end.replace(":", ".")
+            console.log(fullTime.replace(":", "."));
+            console.log("początek obiadu: " + startDinnerTime, "koniec obiadu: " + finishDinnerTime, "koniec lekcji:" +endTime);
+            if (fullTime.replace(":", ".") > endTime && finishDinnerTime > fullTime.replace(":", ".")) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 
@@ -54,7 +55,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
 
             }
 
-           else if(fullTime >= lessons[dayIndex].end) {
+           else if(fullTime.replace(":", ".") >= endTime) {
                 setCheckDate(false)
                 setCheckEndTime(true)
                 setInfoTxt("Lekcje się już skończyły 😊\n sprawdź pełny plan, wybierając z górnego menu ⬆️")
@@ -64,7 +65,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
         else{
            
         }
-    }, [dayIndex])
+    }, [fullTime, dayIndex])
 
     const buttonHandler = (day) => {
         setSelectedDay(day)
