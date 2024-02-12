@@ -101,6 +101,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                             <div className="current-day-plan__map" key={i}>
                                 <p className="hour">{currentLesson == i && currentLesson !== null ? `TERAZ:  ${hour}` : hour}</p>
                                 <p className="lesson">{lesson.lessons[i]}</p>
+                                <p>sala:{lesson.classrooms[i]}</p>
                             </div>
                         ))}
                     </div>
@@ -123,6 +124,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
                             <div className="current-day-plan__map" key={i}>
                                 <p className="hour">{hour}</p>
                                 <p className="lesson">{lesson.lessons[i]}</p>
+                                <p>sala: {lesson.classrooms[i]}</p>
                             </div>
                         ))}
                     </div>

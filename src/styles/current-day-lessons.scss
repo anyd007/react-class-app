@@ -46,7 +46,7 @@
 
         &__map {
             display: grid;
-            grid-template-columns: repeat(2, 50%);
+            grid-template-columns: repeat(3, 33%);
             margin: 0;
             font-weight: 700;
             font-size: 25px;
@@ -54,6 +54,8 @@
             text-shadow: 2px 2px 6px;
             box-shadow: 0 0.2em 0 0 #e9c46a;
             width: 60%;
+            justify-content: center;
+            align-items: center;
           
         }
     }
@@ -86,8 +88,8 @@
             &__map{
                 grid-template-columns: 1fr;
 
-                .lesson{
-                    margin: 0 0 5px 0;
+                p{
+                    margin: 10px 0;
                 }
             }
         }
