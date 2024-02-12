@@ -45,7 +45,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
             let finishDinnerTime = dinnerTimeParts[1].replace(":", ".")
             let startDinnerTime = dinnerTimeParts[0].replace(":", ".")
             let endTime = lessons[dayIndex].end.replace(":", ".")
-            console.log(fullTime.replace(":", "."));
+      
             console.log("początek obiadu: " + startDinnerTime, "koniec obiadu: " + finishDinnerTime, "koniec lekcji:" +endTime);
             if (fullTime.replace(":", ".") > endTime && finishDinnerTime > fullTime.replace(":", ".")) {
                 setCheckDate(false)
@@ -65,7 +65,7 @@ const CurrentDayLesson = ({ lessons, loading }) => {
         else{
            
         }
-    }, [fullTime, dayIndex])
+    }, [dayIndex])
 
     const buttonHandler = (day) => {
         setSelectedDay(day)
