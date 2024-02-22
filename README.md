@@ -1,1 +1,1 @@
-It's a React app with Firebase authentication and a Firestore database. The app utilizes "getDocs" to retrieve school lesson plans, displaying them for each user. After logging in, users can add grades for each subject and delete them if desired. Additionally, there's  feature to add notes for important tasks to be done in school.(in creation)
+url: https://class-1a.netlify.app/
